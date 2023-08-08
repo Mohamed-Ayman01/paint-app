@@ -1,0 +1,74 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+:root {
+  --main-clr: #343434;
+  --sec-clr: #505050;
+  --acnt-clr: #1c8cf4
+}
+
+body {
+  font-family: arial;
+  display: flex;
+  flex-direction: column;
+}
+
+input:focus {
+  outline: none;
+}
+
+.tool-bar {
+  background: var(--main-clr);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tool-bar .tools {
+  display: flex;
+}
+
+.tool-bar .tools button {
+  padding: .75rem;
+  font-size: 1.25rem;
+  color: white;
+  background: var(--sec-clr);
+  border: none;
+  border-right: 1px solid var(--main-clr);
+  cursor: pointer
+}
+
+.tool-bar .tools button:hover {
+  opacity: .9;
+}
+
+.tool-bar .tools button i {
+
+}
+
+.tool-bar .setting {
+  display: flex;
+  gap: 1rem
+}
+
+.tool-bar .setting input[type="color"] {
+  width: 100px;
+  border: none;
+  background: none;
+}
+
+.tool-bar .setting input[type="number"] {
+  background-color: var(--sec-clr);
+  border: none;
+  color: white;
+  margin-right: 1rem;
+}
+
+canvas {
+  border: 1px solid;
+}
