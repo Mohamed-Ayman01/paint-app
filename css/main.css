@@ -33,7 +33,8 @@ input:focus {
   display: flex;
 }
 
-.tool-bar .tools button {
+.tool-bar .tools button,
+.tool-bar .tools a {
   padding: .75rem;
   font-size: 1.25rem;
   color: white;
@@ -43,12 +44,13 @@ input:focus {
   cursor: pointer
 }
 
-.tool-bar .tools button:hover {
+.tool-bar .tools button:hover,
+.tool-bar .tools a:hover {
   opacity: .9;
 }
 
-.tool-bar .tools button i {
-
+.tool-bar .tools button.active {
+  background-color: var(--acnt-clr);
 }
 
 .tool-bar .setting {

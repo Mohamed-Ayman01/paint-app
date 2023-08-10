@@ -23,7 +23,7 @@ clearBtn.addEventListener("click", clearCanvas);
 
 //! drawing feature
 
-function enableDrawing() {
+function enableDrawing(mode) {
   let isMouseDown;
 
   ctx.lineCap = "round";
@@ -70,3 +70,13 @@ colorInput.addEventListener("change", () => {
 sizeInput.addEventListener("change", () => {
   ctx.lineWidth = sizeInput.value;
 });
+
+//! Download img
+
+let saveBtn = document.querySelector(".tools a.save");
+
+saveBtn.addEventListener("click", () => {
+  // get image URI from canvas object
+  let imageURI = canvas.toDataURL("image/jpg");
+  saveBtn.href = imageURI;
+})
