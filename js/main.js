@@ -23,7 +23,7 @@ clearBtn.addEventListener("click", clearCanvas);
 
 //! drawing feature
 
-function enableDrawing(mode) {
+function enableDrawing() {
   let isMouseDown;
 
   ctx.lineCap = "round";
