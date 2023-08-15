@@ -1,5 +1,7 @@
 let canvas = document.querySelector("canvas");
 let ctx = canvas.getContext("2d");
+ctx.lineCap = "round";
+
 let toolBar = document.querySelector(".tool-bar");
 
 //! adjust canvas size
@@ -31,20 +33,23 @@ function enableDrawing() {
   function draw(e) {
     if (!isMouseDown) return;
 
+    let [x, y] = [e.offsetX, e.offsetY]
     // just to draw
-    ctx.lineTo(e.offsetX, e.offsetY);
-    ctx.moveTo(e.offsetX, e.offsetY);
+    ctx.lineTo(x, y);
+    ctx.moveTo(x, y);
     ctx.stroke();
 
     // to make drawing line smooth
     ctx.beginPath();
-    ctx.moveTo(e.offsetX, e.offsetY);
+    ctx.moveTo(x, y);
   }
 
   canvas.addEventListener("mousedown", (e) => {
     isMouseDown = true;
     draw(e);
   });
+
+  canvas.addEventListener("mousemove", draw);
 
   canvas.addEventListener("mouseup", () => {
     isMouseDown = false;
@@ -53,9 +58,42 @@ function enableDrawing() {
 
   canvas.addEventListener("mouseout", () => {
     isMouseDown = false;
+    ctx.beginPath();
   });
 
-  canvas.addEventListener("mousemove", draw);
+  //! touch events for mobile drawing 
+
+  function drawOnMobile(e) {
+    [...e.changedTouches].forEach(touch => {
+    let [x, y] = [touch.pageX, touch.pageY - toolBar.clientHeight];
+    // just to draw
+    ctx.lineTo(x, y);
+    ctx.moveTo(x, y);
+    ctx.stroke();
+
+    // to make drawing line smooth
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    })
+  }
+
+  canvas.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    
+    drawOnMobile(e);
+  });
+
+  canvas.addEventListener("touchmove", (e) => {
+    drawOnMobile(e);
+  });
+
+  canvas.addEventListener("touchend", () => {
+    ctx.beginPath();
+  });
+  
+  canvas.addEventListener("touchcancel", () => {
+    ctx.beginPath();
+  });
 }
 enableDrawing();
 
@@ -79,4 +117,4 @@ saveBtn.addEventListener("click", () => {
   // get image URI from canvas object
   let imageURI = canvas.toDataURL("image/jpg");
   saveBtn.href = imageURI;
-})
+});
