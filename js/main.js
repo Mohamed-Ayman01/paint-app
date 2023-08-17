@@ -1,18 +1,6 @@
 let canvas = document.querySelector("canvas");
 let ctx = canvas.getContext("2d");
-ctx.lineCap = "round";
-
 let toolBar = document.querySelector(".tool-bar");
-
-//! adjust canvas size
-
-function adjustCanvasSize() {
-  canvas.height = window.innerHeight - toolBar.clientHeight;
-  canvas.width = window.innerWidth;
-}
-adjustCanvasSize();
-
-window.addEventListener("resize", adjustCanvasSize);
 
 //! canvas clear feature
 
@@ -118,3 +106,18 @@ saveBtn.addEventListener("click", () => {
   let imageURI = canvas.toDataURL("image/jpg");
   saveBtn.href = imageURI;
 });
+
+//! adjust canvas size
+
+function adjustCanvasSize() {
+  canvas.height = window.innerHeight - toolBar.clientHeight;
+  canvas.width = window.innerWidth;
+
+  // Set ctx values after canvas resizing
+  ctx.lineCap = "round";
+  ctx.lineWidth = sizeInput.value;
+  ctx.strokeStyle = colorInput.value;
+}
+adjustCanvasSize();
+
+window.addEventListener("resize", adjustCanvasSize);
